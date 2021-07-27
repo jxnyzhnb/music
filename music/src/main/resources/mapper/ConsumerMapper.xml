@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.music.mapper.ConsumerMapper">
+    <sql id="Base_Column">
+        select * from consumer
+    </sql>
+    <insert id="insert" parameterType="consumer">
+        insert into consumer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                id,
+            </if>
+            <if test="username !=null">
+                username,
+            </if>
+            <if test="password !=null">
+                password,
+            </if>
+            <if test="sex !=null">
+                sex,
+            </if>
+            <if test="phoneNum !=null">
+                phone_num,
+            </if>
+            <if test="email !=null">
+                email,
+            </if>
+            <if test="birth !=null">
+                birth,
+            </if>
+            <if test="introduce !=null">
+                introduce,
+            </if>
+            <if test="location !=null">
+                location,
+            </if>
+            <if test="avator !=null">
+                avator,
+            </if>
+            <if test="createTime !=null">
+                create_time,
+            </if>
+            <if test="updateTime !=null">
+                update_time,
+            </if>
+            <if test="userUpId !=null">
+                user_up_id,
+            </if>
+
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                #{id},
+            </if>
+            <if test="username !=null">
+                #{username},
+            </if>
+            <if test="password !=null">
+                #{password},
+            </if>
+            <if test="sex !=null">
+                #{sex},
+            </if>
+            <if test="phoneNum !=null">
+                #{phoneNum},
+            </if>
+            <if test="email !=null">
+                #{email},
+            </if>
+            <if test="birth !=null">
+                #{birth},
+            </if>
+            <if test="introduce !=null">
+                #{introduce},
+            </if>
+            <if test="location !=null">
+                #{location},
+            </if>
+            <if test="avator !=null">
+                #{avator},
+            </if>
+            <if test="createTime !=null">
+                #{createTime},
+            </if>
+            <if test="updateTime !=null">
+                #{updateTime},
+            </if>
+            <if test="userUpId !=null">
+                #{userUpId},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="consumer">
+        update consumer
+        <set>
+            <if test="username !=null">
+                username=#{username},
+            </if>
+            <if test="password !=null">
+                password=#{password},
+            </if>
+            <if test="sex !=null">
+                sex=#{sex},
+            </if>
+            <if test="phoneNum !=null">
+                phone_num=#{phoneNum},
+            </if>
+            <if test="email !=null">
+                email=#{email},
+            </if>
+            <if test="birth !=null">
+                birth=#{birth},
+            </if>
+            <if test="introduce !=null">
+                introduce=#{introduce},
+            </if>
+            <if test="location !=null">
+                location=#{location},
+            </if>
+            <if test="avator !=null">
+                avator=#{avator},
+            </if>
+            <if test="createTime !=null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime !=null">
+                update_time=#{updateTime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deleteOne" parameterType="int">
+        delete  from consumer
+        where id=#{id}
+    </delete>
+
+    <select id="selectConsumerById" resultType="com.zh.music.domain.Consumer" parameterType="int">
+        <include refid="Base_Column"/>
+        where id=#{id}
+    </select>
+
+
+    <select id="selectAll" resultType="com.zh.music.domain.Consumer">
+        <include refid="Base_Column"/>
+    </select>
+
+
+    <select id="selectConsumerByName" resultType="com.zh.music.domain.Consumer">
+        <include refid="Base_Column"/>
+        where username=#{username}
+    </select>
+    <select id="verifyLogin" resultType="com.zh.music.domain.Consumer">
+         <include refid="Base_Column"/>
+        where username=#{username} and password=#{password}
+    </select>
+    <select id="selectAvatorByID" resultType="java.lang.String" parameterType="int">
+        select avator
+        from consumer
+        where id=#{id}
+    </select>
+</mapper>

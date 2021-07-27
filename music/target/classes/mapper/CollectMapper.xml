@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.music.mapper.CollectMapper">
+    <insert id="insert" parameterType="collect">
+        insert into collect
+        <trim prefix=" ( " suffix=" ) " suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="songId != null">
+                song_id,
+            </if>
+            <if test="songListId != null">
+                song_list_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="songId != null">
+                #{songId},
+            </if>
+            <if test="songListId != null">
+                #{songListId},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+
+    <delete id="deleteOne" parameterType="int">
+        delete  from collect
+        where id=#{id}
+    </delete>
+
+
+    <delete id="deleteByUserIdSongId" parameterType="map">
+        delete  from collect
+        where user_id=#{userId} and song_id=#{songId}
+    </delete>
+
+
+    <select id="selectCollectById" resultType="com.zh.music.domain.Collect" parameterType="int">
+        select * from collect
+        where id=#{id}
+    </select>
+
+
+    <select id="selectAll" resultType="com.zh.music.domain.Collect">
+        select * from collect
+    </select>
+
+
+    <select id="selectCollectByUserId" resultType="com.zh.music.domain.Collect" parameterType="int">
+        select * from collect
+        where user_id=#{userId}
+    </select>
+    <select id="selectByUserIdSingId" resultType="java.lang.Integer" parameterType="collect">
+        select count(*) from collect
+        where user_id=#{userId} and song_id=#{songId}
+    </select>
+</mapper>

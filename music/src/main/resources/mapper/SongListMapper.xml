@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.music.mapper.SongListMapper">
+    <sql id="Base_Column">
+        id,title,pic,introduce,style
+    </sql>
+    <insert id="insert" parameterType="songList">
+        insert into song_list
+        <trim prefix=" ( " suffix=") " suffixOverrides=",">
+            <if test="title !=null">
+                title,
+            </if>
+            <if test="pic !=null">
+                pic,
+            </if>
+            <if test="introduce !=null">
+                introduce,
+            </if>
+            <if test="style !=null">
+                style,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="title !=null">
+                #{title},
+            </if>
+            <if test="pic !=null">
+                #{pic},
+            </if>
+            <if test="introduce !=null">
+                #{introduce},
+            </if>
+            <if test="style !=null">
+                #{style},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="songList">
+        update song_list
+        <set>
+            <if test="title !=null">
+                title=#{title},
+            </if>
+            <if test="pic !=null">
+                pic=#{pic},
+            </if>
+            <if test="introduce !=null">
+                introduce=#{introduce},
+            </if>
+            <if test="style !=null">
+                style=#{style},
+            </if>
+        </set>
+            where id=#{id}
+    </update>
+
+
+    <delete id="deleteOne" parameterType="int">
+        delete from song_list
+        where id=#{id}
+    </delete>
+
+
+    <select id="selectSongListById" resultType="com.zh.music.domain.SongList" parameterType="int">
+        select <include refid="Base_Column"/>
+        from song_list
+        where id=#{id}
+    </select>
+
+
+    <select id="selectAll" resultType="com.zh.music.domain.SongList">
+        select <include refid="Base_Column"/>
+        from song_list
+    </select>
+
+
+    <select id="selectSongListByTitle" resultType="com.zh.music.domain.SongList" parameterType="string">
+        select <include refid="Base_Column"/>
+        from song_list
+        where title=#{title}
+    </select>
+
+
+    <select id="selectSongListByLikeStyle" resultType="com.zh.music.domain.SongList" parameterType="string">
+        select  <include refid="Base_Column"/>
+        from song_list
+        where style like #{likeStyle}
+    </select>
+    <select id="selectSongListByLikeTitle" resultType="com.zh.music.domain.SongList">
+        select <include refid="Base_Column"/>
+        from song_list
+        where title like #{likeTitle}
+    </select>
+
+
+    <select id="selectPicById" resultType="java.lang.String" parameterType="int">
+        select pic from song_list
+        where id=#{id}
+    </select>
+
+
+</mapper>

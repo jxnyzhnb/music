@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.music.mapper.ListSongMapper">
+    <sql id="Base_Sql">
+       id,song_id,song_list_id
+    </sql>
+    <insert id="insert" parameterType="listSong">
+        insert into list_song
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="songId !=null">
+                song_id,
+            </if>
+            <if test="songListId !=null">
+                song_list_id,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="songId !=null">
+                #{songId},
+            </if>
+            <if test="songListId !=null">
+                #{songListId},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="listSong">
+        update list_song
+        <set>
+            <if test="songId!=null">
+                song_id=#{songId},
+            </if>
+            <if test="songListId!=null">
+                song_list_id=#{songListId},
+            </if>
+        </set>
+            where id=#{id}
+    </update>
+
+
+    <delete id="deleteOne" parameterType="int">
+        delete  from
+        list_song
+        where id=#{id}
+    </delete>
+
+
+    <delete id="deleteListSongBySongIdAndSongListId" parameterType="map">
+        delete from
+        list_song
+        where song_id=#{songId} and song_list_id=#{songListId}
+    </delete>
+
+
+    <select id="selectListSongById" resultType="com.zh.music.domain.ListSong" parameterType="int">
+        select <include refid="Base_Sql"/>
+        from list_song
+        where id=#{id}
+    </select>
+
+
+    <select id="selectAll" resultType="com.zh.music.domain.ListSong">
+       select <include refid="Base_Sql"/>
+       from list_song
+    </select>
+
+
+    <select id="selectListSongBySongListId" resultType="com.zh.music.domain.ListSong" parameterType="int">
+        select <include refid="Base_Sql"/>
+        from list_song
+        where song_list_id=#{songListId}
+    </select>
+
+
+</mapper>

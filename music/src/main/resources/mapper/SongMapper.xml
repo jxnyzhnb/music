@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.music.mapper.SongMapper">
+    <sql id="Base_Column">
+        id,singer_id,name,introduce,create_time,update_time,pic,lyric,url
+    </sql>
+    <insert id="insert" parameterType="song">
+        insert into song
+        <trim prefix=" ( " suffix=" ) " suffixOverrides=",">
+            <if test="singerId != null">
+                singer_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="introduce != null">
+                introduce,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="lyric != null">
+                lyric,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+        </trim>
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="singerId != null">
+                #{singerId},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="introduce != null">
+                #{introduce},
+            </if>
+            <if test="createTime != null">
+                #{create_time},
+            </if>
+            <if test="updateTime != null">
+                #{update_time},
+            </if>
+            <if test="pic != null">
+                #{pic},
+            </if>
+            <if test="lyric != null">
+                #{lyric},
+            </if>
+            <if test="url != null">
+                #{url},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="song">
+        update song
+        <set>
+            <if test="singerId != null">
+                singer_id=#{singerId},
+            </if>
+            <if test="name != null">
+                name=#{name},
+            </if>
+            <if test="introduce != null">
+                introduce=#{introduce},
+            </if>
+            <if test="createTime != null">
+                create_time=#{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time=#{updateTime},
+            </if>
+            <if test="pic != null">
+                pic=#{pic},
+            </if>
+            <if test="lyric != null">
+                lyric=#{lyric},
+            </if>
+            <if test="url != null">
+                url=#{url},
+            </if>
+        </set>
+            where id=#{id}
+    </update>
+
+
+    <delete id="deleteOne" parameterType="int">
+        delete  from song
+        where id=#{id}
+    </delete>
+
+
+    <select id="selectSongById" resultType="com.zh.music.domain.Song" parameterType="int">
+        select <include refid="Base_Column"/>
+        from song where id=#{id}
+    </select>
+
+
+    <select id="selectAll" resultType="com.zh.music.domain.Song">
+        select <include refid="Base_Column"/>
+        from song
+    </select>
+
+
+    <select id="selectSongByName" resultType="com.zh.music.domain.Song" parameterType="string">
+        select <include refid="Base_Column"/>
+        from song where name=#{name}
+    </select>
+
+
+    <select id="selectSongByLikeName" resultType="com.zh.music.domain.Song" parameterType="string">
+        select <include refid="Base_Column"/>
+        from song where name like #{likeName}
+    </select>
+
+
+    <select id="selectSongBySingerId" resultType="com.zh.music.domain.Song" parameterType="int">
+        select <include refid="Base_Column"/>
+        from song where singer_id=#{singerId}
+    </select>
+
+
+    <select id="selectUrlById" resultType="java.lang.String" parameterType="int">
+        select url from song where id=#{id}
+    </select>
+    <select id="selectPicById" resultType="java.lang.String" parameterType="int">
+        select pic from song where id=#{id}
+    </select>
+
+
+</mapper>

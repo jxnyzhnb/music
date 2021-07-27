@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zh.music.mapper.userupMapper">
+    <insert id="insert" parameterType="userup">
+        insert into userup(id,comment_id,username)
+        values(null,#{commentId},#{username})
+    </insert>
+    <delete id="deleteOne" parameterType="userup">
+        delete from userup
+        where comment_id=#{commentId} and username=#{username}
+    </delete>
+    <select id="selectSongByCommentIdUserName" resultType="java.lang.Integer" parameterType="userup">
+        select count(*) from userup
+        where comment_id=#{commentId} and username=#{username}
+    </select>
+
+</mapper>

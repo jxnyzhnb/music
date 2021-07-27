@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/music.iml" filepath="$PROJECT_DIR$/music.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../music/music/music-server/music (1) (com.javaclimb).iml" filepath="$PROJECT_DIR$/../../../../music/music/music-server/music (1) (com.javaclimb).iml" />
+    </modules>
+  </component>
+</project>
